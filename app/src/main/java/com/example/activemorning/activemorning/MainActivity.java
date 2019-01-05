@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Boolean[] week = {mon,tue,wed,thu,fri,sat,sun};
 
+
                 alarmList.add(new Alarm(alarmName,uur+":"+minuut,week));
                 Log.i("alarmList", Integer.toString(alarmList.size()));
                 Log.i("minuut", Integer.toString(minuut));

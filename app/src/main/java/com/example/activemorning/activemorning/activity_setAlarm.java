@@ -3,6 +3,7 @@ package com.example.activemorning.activemorning;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -46,7 +47,6 @@ public class activity_setAlarm extends AppCompatActivity {
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.editTextAlarm);
                 strAlarmName = editText.getText().toString();
-
                 CheckBox cboxMon = (CheckBox) findViewById(R.id.cboxMon);
                 mon = cboxMon.isChecked();
 
@@ -54,7 +54,7 @@ public class activity_setAlarm extends AppCompatActivity {
                 tue = cboxTue.isChecked();
 
                 CheckBox cboxWed = (CheckBox) findViewById(R.id.cboxWed);
-                wed = cboxMon.isChecked();
+                wed = cboxWed.isChecked();
 
                 CheckBox cboxThu = (CheckBox) findViewById(R.id.cboxThu);
                 thu = cboxThu.isChecked();

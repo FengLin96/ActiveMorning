@@ -40,7 +40,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
         Alarm currentAlarm = alarmList.get(i);
 
         //add data to the view
-        alarmViewHolder.alarmTime.setText(currentAlarm.name);
+        alarmViewHolder.alarmLabel.setText(currentAlarm.name);
         alarmViewHolder.alarmTime.setText(currentAlarm.time);
         if(currentAlarm.onOff)
             alarmViewHolder.swtOnOff.setChecked(true);
