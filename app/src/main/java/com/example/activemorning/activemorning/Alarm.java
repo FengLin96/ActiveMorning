@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -75,6 +77,22 @@ public class Alarm extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent ringIntent = new Intent(MainActivity.class, RingActivity.class);
+        Toast.makeText(context,"Alarm........",Toast.LENGTH_LONG).show();
+        Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        StepCountFunction stepCountFunction = new StepCountFunction(context);
+        stepCountFunction.registerSensor();
+        stepCountFunction.initListener();
+        if (stepCountFunction.TotaalStep != 20)
+        {
+            vibrator.vibrate(300000);
+        }
+        else
+        {
+            stepCountFunction.unregisterSensor(context);
+        }
+
+
+//        Intent ringIntent = new Intent(context, RingActivity.class);
+//        context.startActivity(ringIntent);
     }
 }

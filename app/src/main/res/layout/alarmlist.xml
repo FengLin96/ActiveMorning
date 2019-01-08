@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/alarmTime"
                 android:text="00:00"
-                android:textSize="70dp"
+                android:textSize="50dp"
                 android:textColor="@android:color/black"
                 />
 
@@ -47,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="2dp">
+
+                android:layout_marginLeft="9dp">
 
                 <TextView
                     android:id="@+id/lblMon"
@@ -121,20 +122,31 @@
                 >
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btnDelete"
+                    android:layout_width="78dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:text="DELETE"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_margin="5dp"
+                    android:id="@+id/btnEdit"
+                    android:layout_width="78dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@color/colorPrimary"
                     android:text="EDIT"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/btnEdit"/>
+                    android:textStyle="bold" />
 
                 <Switch
                     android:layout_width="56dp"
                     android:layout_height="54dp"
-                    android:layout_margin="5dp"
                     android:layout_gravity="center_vertical|left"
                     android:id="@+id/btnSwitch"
                   />

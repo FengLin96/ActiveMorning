@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -87,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE, minuut);
                 Intent intent = new Intent(MainActivity.this,Alarm.class);
                 PendingIntent ringIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,0);
-                int interval = (int) intent.getLongExtra("intervalMillis", 0);
-                am.setWindow(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),,interval);
+                am.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),ringIntent);
+
+                //int interval = (int) intent.getLongExtra("intervalMillis", 0);
+                //am.setWindow(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),,interval);
             }
         }
     }

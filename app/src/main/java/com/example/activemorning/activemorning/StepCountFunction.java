@@ -24,7 +24,7 @@ public class StepCountFunction {
 
     public String isSupportStepDetector;
     public String isSupportStepCounter;
-
+    public int TotaalStep;
     private SensorManager sensorManager; // = een systeem service, gebruik voor om bepaalde sensor te krijgen
 
     private Sensor stepCounter; //totaal steps sensoren
@@ -59,7 +59,6 @@ public class StepCountFunction {
             public void onSensorChanged(SensorEvent sensorEvent) {
                 Log.e("Counter-SensorChanged",sensorEvent.values[0]+"---"+sensorEvent.accuracy+"---"+sensorEvent.timestamp);
                 stepCounterText = ("Totaal steps" + sensorEvent.values[0]);
-
                 if(stepCounterText != null || stepCounterText != "")
                     stepCounter.setText(stepCounterText);
             }
@@ -81,6 +80,39 @@ public class StepCountFunction {
                     stepDetector.setText(stepDetectorText);
                     stepDetectorTime.setText(stepDetectorTimeText);
                 }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+                Log.e("Detector-Accuracy", sensor.getName()+"---"+i);
+            }
+        };
+
+    }
+    public void initListener()
+    {
+        stepCounterListener = new SensorEventListener() {
+            @Override   //Deze methode wordt geactiveerd wanneer de nauwkeurigheid van de geregistreerde sensor verandert.
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                Log.e("Counter-SensorChanged",sensorEvent.values[0]+"---"+sensorEvent.accuracy+"---"+sensorEvent.timestamp);
+                stepCounterText = ("Totaal steps" + sensorEvent.values[0]);
+                if(stepCounterText != null || stepCounterText != "")
+                    TotaalStep = (int)sensorEvent.values[0]; // totaal stappen
+
+            }
+
+            @Override //Deze methode wordt geactiveerd wanneer zich een nieuwe gebeurtenis voordoet op de geregistreerde sensor
+            public void onAccuracyChanged(Sensor sensor,int i) {
+                Log.e("Counter-Accuracy", sensor.getName()+"---"+i);
+            }
+        };
+
+        stepDetectorListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                Log.e("Detector-SensorChanged",sensorEvent.values[0]+"---"+sensorEvent.accuracy+"---"+sensorEvent.timestamp);
+                stepDetectorText = "huidige stap count" + sensorEvent.values[0];
+                stepDetectorTimeText = "huidig staptijd" + simpleDateFormat.format(sensorEvent.timestamp/1000000);
             }
 
             @Override
