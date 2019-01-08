@@ -1,6 +1,22 @@
 package com.example.activemorning.activemorning;
 
-public class Alarm {
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.nfc.Tag;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.util.Calendar;
+
+import static android.content.Context.ALARM_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService; //misschien hier een probleem
+import static android.support.v4.content.ContextCompat.startActivities;
+
+public class Alarm extends BroadcastReceiver{
+
     public enum Day
     {
          MONDAY,
@@ -13,12 +29,20 @@ public class Alarm {
     }
     String name;
     String time;
+    String uur;
+    String minuut;
     Boolean[] week = {false,false,false,false,false,false,false};
     Boolean onOff = false;
-    public Alarm(String labelName, String time,Day day)
+    public Alarm()
+    {
+
+    }
+    public Alarm(String labelName, String uur,String minuut,Day day)
     {
         this.name = labelName;
-        this.time = time;
+        this.time = uur+":"+minuut;
+        this.uur = uur;
+        this.minuut = minuut;
         switch (day)
         {
             case MONDAY: week[0] = true;
@@ -31,12 +55,15 @@ public class Alarm {
         }
         this.onOff = true;
     }
-    public Alarm(String labelName, String time,Boolean[] week)
+    public Alarm(String labelName, String uur,String minuut,Boolean[] week)
     {
         this.name = labelName;
-        this.time = time;
         this.week = week;
         this.onOff = true;
+
+        this.time = uur+":"+minuut;
+        this.uur = uur;
+        this.minuut = minuut;
     }
     public Boolean getOnOff() {
         return onOff;
@@ -46,4 +73,8 @@ public class Alarm {
         this.onOff = onOff;
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent ringIntent = new Intent(MainActivity.class, RingActivity.class);
+    }
 }

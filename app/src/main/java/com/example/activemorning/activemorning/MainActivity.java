@@ -1,6 +1,10 @@
 package com.example.activemorning.activemorning;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,13 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        Alarm alarm1 = new Alarm("alarm1","12:00",Alarm.Day.MONDAY);
-        Alarm alarm2 = new Alarm("alarm2","13:00",Alarm.Day.TUESDAY);
-
-        alarmList.add(alarm1);
-        alarmList.add(alarm2);
 
         mRecyclerView = findViewById(R.id.recycleView);
         mAdapter = new AlarmListAdapter(this, alarmList);
@@ -77,12 +74,21 @@ public class MainActivity extends AppCompatActivity {
                 Boolean[] week = {mon,tue,wed,thu,fri,sat,sun};
 
 
-                alarmList.add(new Alarm(alarmName,uur+":"+minuut,week));
+                alarmList.add(new Alarm(alarmName,Integer.toString(uur),Integer.toString(minuut),week));
                 Log.i("alarmList", Integer.toString(alarmList.size()));
                 Log.i("minuut", Integer.toString(minuut));
                 Log.i("uur",Integer.toString(uur));
 
                 mAdapter.notifyDataSetChanged();
+
+                AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY,uur);
+                calendar.set(Calendar.MINUTE, minuut);
+                Intent intent = new Intent(MainActivity.this,Alarm.class);
+                PendingIntent ringIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent,0);
+                int interval = (int) intent.getLongExtra("intervalMillis", 0);
+                am.setWindow(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),,interval);
             }
         }
     }

@@ -82,6 +82,10 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
         else
             alarmViewHolder.lblSun.setTextColor(Color.GRAY);
 
+        //+ button clicklistener
+
+        //+ switchbutton clicklistener
+
     }
 
     @Override
@@ -89,7 +93,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
         return alarmList.size();
     }
 }
-class AlarmViewHolder extends RecyclerView.ViewHolder{
+class AlarmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     AlarmListAdapter mAdapter;
     TextView alarmLabel, alarmTime,lblMon,lblTue,lblWed,lblThu,lblFri,lblSat,lblSun;
@@ -109,6 +113,11 @@ class AlarmViewHolder extends RecyclerView.ViewHolder{
         swtOnOff = itemView.findViewById(R.id.btnSwitch);
 
         this.mAdapter = alarmListAdapter;
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }
